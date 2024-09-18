@@ -20,24 +20,16 @@ $headers = [
 // Initialize cURL session
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-curl_setopt($ch, CURLOPT_ENCODING, 'deflate,gzip');
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
-// Execute the cURL request and capture the response
 $response = curl_exec($ch);
-
-// Check if cURL request failed
-if (curl_errno($ch)) {
-    echo 'cURL error: ' . curl_error($ch);
-} else {
-    // Return the response as JSON
-    header('Content-Type: application/json');
-    echo $response;
-}
-
-// Close the cURL session
 curl_close($ch);
+
+header('Content-Type: application/json');
+echo json_encode($response);
 
 ?>
