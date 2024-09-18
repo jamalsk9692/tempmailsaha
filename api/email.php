@@ -1,4 +1,5 @@
 <?php
+phpinfo();
 
 $url = 'https://kyc-api.co.in/api/pan_details?panno=AFIPI5458M';
 
